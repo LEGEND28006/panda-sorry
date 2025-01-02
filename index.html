@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apology - Combined Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #06192a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #feebda;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #225f5f;
+            color: #feebda;
+            margin: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #218f7a;
+        }
+
+        #noBtn {
+            background-color: #800020; 
+        }
+
+        #noBtn:hover {
+            background-color: #b5002d; 
+        }
+
+        .thank-you {
+            display: none;
+            font-size: 2em;
+            color: #feebda;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .please-text {
+            font-size: 1.5em;
+            color: rgb(255, 195, 216);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="container">
+    <!-- Image section -->
+    <img id="caseImage" src="https://i.postimg.cc/JzDvV1qc/4.jpg" alt="Apology Image" />
+    <h1 id="question">please forgive me 🙏🙏🙏?</h1>
+    <button class="btn" id="yesBtn" onclick="handleAnswer('yes')">Yes</button>
+    <button id="noBtn" class="btn" onclick="handleNoClick()" onmouseover="handleMouseOver()">No</button>
+</div>
+
+<div class="thank-you" id="thankYouMessage">
+    Thank you for forgiving me!, I knew you🐼 are the best 😉
+</div>
+
+<div id="pleaseText" class="please-text">
+    Sorry na maaf kri de ne panda , please
+</div>
+
+<script>
+    let currentPage = 1;
+
+    function handleAnswer(answer) {
+        if (answer === 'yes') {
+            showThankYou();
+        }
+    }
+
+    function handleNoClick() {
+        if (currentPage === 4) {
+            teleportNoButton(); // Teleport button on click in case 4
+            addPleaseMessage();
+        } else {
+            goToNextPage();
+        }
+    }
+
+    function handleMouseOver() {
+        if (currentPage === 4) {
+            teleportNoButton(); // Teleport button on hover in case 4
+            addPleaseMessage();
+        }
+    }
+
+    function showThankYou() {
+        document.getElementById('container').style.display = 'none';
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        thankYouMessage.style.display = 'block';
+        setTimeout(() => {
+            thankYouMessage.style.opacity = 1;
+        }, 100);
+        document.getElementById('pleaseText').style.display = 'none'; // Hide the "please" text
+    }
+
+    function goToNextPage() {
+        const questionElement = document.getElementById('question');
+        const imageElement = document.getElementById('caseImage');
+        currentPage++;
+
+        switch (currentPage) {
+            case 2:
+                questionElement.textContent = "bs kinderjoy lai apis 🍫🍫🍫";
+                imageElement.src = "https://i.postimg.cc/zD2xJs3d/3.jpg"; // Image for case 2
+                break;
+            case 3:
+                questionElement.textContent = "sorryyyyyyy neee yrr panda 🤧🥺";
+                imageElement.src = "https://i.postimg.cc/0yRdjPvC/1.png"; // Image for case 3
+                break;
+            case 4:
+                questionElement.textContent = "pandaaaaa pleaseeeee 🐼🐼🐼🐼";
+                imageElement.src = "https://i.postimg.cc/c42r0vFC/panda1.webp"; // Image for case 4
+                document.getElementById('noBtn').textContent = "no";
+                document.getElementById('pleaseText').style.display = 'block'; // Show the "please" text
+                break;
+            default:
+                break;
+        }
+    }
+
+    function teleportNoButton() {
+        const noBtn = document.getElementById('noBtn');
+        const randomX = Math.floor(Math.random() * (window.innerWidth - noBtn.offsetWidth));
+        const randomY = Math.floor(Math.random() * (window.innerHeight - noBtn.offsetHeight));
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = randomX + 'px';
+        noBtn.style.top = randomY + 'px';
+    }
+
+    function addPleaseMessage() {
+        if (currentPage === 4) {
+            const pleaseTextElement = document.getElementById('pleaseText');
+            pleaseTextElement.textContent += ' please'; // Add "please" every time
+        }
+    }
+</script>
+
+</body>
+</html>
